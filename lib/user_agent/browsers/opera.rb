@@ -1,5 +1,3 @@
-require 'pry'
-
 class UserAgent
   module Browsers
     class Opera < Base
