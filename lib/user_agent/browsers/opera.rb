@@ -1,9 +1,13 @@
+require 'pry'
+
 class UserAgent
   module Browsers
     class Opera < Base
       def self.extend?(agent)
+        @@LAST_PIECE = agent.last.to_s
         (agent.first && agent.first.product == 'Opera') ||
-          (agent.application && agent.application.product == 'Opera')
+        (agent.application && agent.application.product == 'Opera') ||
+        (agent.last && agent.last.to_s =~ /OPR/)
       end
 
       def version
@@ -14,6 +18,10 @@ class UserAgent
         else
           super
         end
+      end
+
+      def browser
+        "Opera"
       end
 
       def platform
@@ -39,7 +47,7 @@ class UserAgent
       end
 
       def mobile?
-        mini?
+        mini? || @@LAST_PIECE =~ /OPR/
       end
 
       def os

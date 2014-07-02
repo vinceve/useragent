@@ -157,14 +157,19 @@ describe "UserAgent: 'Opera/9.80 (J2ME/MIDP; Opera Mini/9 (Compatible; MSIE:9.0;
   it { @useragent.should be_mobile }
 end
 
-describe "UserAgent: 'Opera/9.80 (J2ME/MIDP; Opera Mini/9.80 (J2ME/23.377; U; en) Presto/2.5.25 Version/10.54'" do
+describe "UserAgent 'Mozilla/5.0 (Linux; Android 4.4.2; Google Nexus 4 - 4.4.2 - API 19 - 768x1280 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.138 Mobile Safari/537.36 OPR/22.0.1485.78487'" do
+
   before do
-    @useragent = UserAgent.parse("Opera/9.80 (J2ME/MIDP; Opera Mini/9.80 (J2ME/23.377; U; en) Presto/2.5.25 Version/10.54")
+    @useragent = UserAgent.parse("Mozilla/5.0 (Linux; Android 4.4.2; Google Nexus 4 - 4.4.2 - API 19 - 768x1280 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.138 Mobile Safari/537.36 OPR/22.0.1485.78487")
   end
 
   it_should_behave_like "Opera browser"
 
   it { @useragent.should be_mobile }
+
+  it "should return 'Android 4.4.2' as its os" do
+    @useragent.os.should == "Android 4.4.2"
+  end
 end
 
 # http://www.useragentstring.com/Opera%20Mini9.80_id_17936.php
